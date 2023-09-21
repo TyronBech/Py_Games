@@ -55,7 +55,8 @@ class Hangman(object):
     ]
     WORDBANK = ['HAPPY', 'BIRTHDAY', 'HYDROPHOBIC', 'COMPUTER', 'MOUSE', 'LAPTOP', 'PILLOWS',
                 'SNOWMAN', 'ABOVE', 'ABOUT', 'AFTER', 'AGAIN', 'AGREE', 'ALL', 'ALONE',
-                'ALONG', 'ALMOST', 'ALSO', 'AM', 'AN', 'AND', 'ANY', 'ARE', 'AS', 'AT', 'AWAY']
+                'ALONG', 'ALMOST', 'ALSO', 'PYTHON', 'JAVA', 'ROBUST', 'ANY', 'ARE', 
+                'OUTSTANDING', 'KEYBOARD', 'AWAY']
     def __init__(self):
         self.Word_to_Guess = random.choice(self.WORDBANK)
         self.Gameplay()
@@ -72,16 +73,16 @@ class Hangman(object):
         if guess.isdigit():
             print('The entered guess was a digit')
             return (underscores, False)
+        elif guess in underscores:
+            print("The letter is already been selected")
+            return (underscores, False)
         elif len(guess) == 1 and guess in dict_coll:
             for index in dict_coll[guess]:
                 list_underscores[index] = guess
             underscores = ''.join(list_underscores)
             return (underscores, True)
-        elif len(guess) > 1:
-            return (guess, True)
-        elif guess in underscores:
-            print("The letter is already been selected")
-            return (underscores, False)
+        elif len(guess) > 1 and guess == self.Word_to_Guess:
+            return (self.Word_to_Guess, True)
         else:
             if len(guess) == 1:
                 print('The guessed letter does not exist in the word')
@@ -109,6 +110,7 @@ class Hangman(object):
                 break
             if i == len(self.HANGINGMAN):
                 print('Sorry, you lose the game')
+                print('The correct word is: ' + self.Word_to_Guess)
                 break
             input('Press Enter to continue...')
 
