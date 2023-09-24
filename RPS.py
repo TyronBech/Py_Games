@@ -14,18 +14,18 @@ class rock_paper_scissors(object):
         self.RPS_title.pack(pady=30)
         self.frame = tk.Frame(self.class_window, bg=mn.COLORS[1], width=180, height=300)
         self.frame.pack(padx= 10, pady=10, side='left')
-        rock_button = tk.Button(
+        self.rock_button = tk.Button(
             self.frame, image=self.images['Rock'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self.Gameplay('Rock'))
-        rock_button.grid(row=0, column=0, pady=5)
-        paper_button = tk.Button(
+        self.rock_button.grid(row=0, column=0, pady=5)
+        self.paper_button = tk.Button(
             self.frame, image=self.images['Paper'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self.Gameplay('Paper'))
-        paper_button.grid(row=1, column=0, pady=5)
-        scissors_button = tk.Button(
+        self.paper_button.grid(row=1, column=0, pady=5)
+        self.scissors_button = tk.Button(
             self.frame, image=self.images['Scissors'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self.Gameplay('Scissors'))
-        scissors_button.grid(row=2, column=0, pady=5)
-        exit_button = tk.Button(
+        self.scissors_button.grid(row=2, column=0, pady=5)
+        self.exit_button = tk.Button(
             self.frame, image=self.images['Exit'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=lambda: self.Exit_game(main_window))
-        exit_button.grid(row=3, column=0, pady=5)
+        self.exit_button.grid(row=3, column=0, pady=5)
         self.class_window.update()
     def Gameplay(self, user_choice):
         computer_choices = {
@@ -33,6 +33,10 @@ class rock_paper_scissors(object):
             'Paper' : 'Paper_computer',
             'Scissors' : 'Scissors_computer'
         }
+        self.rock_button.config(state=tk.DISABLED)
+        self.paper_button.config(state=tk.DISABLED)
+        self.scissors_button.config(state=tk.DISABLED)
+        self.exit_button.config(state=tk.DISABLED)
         self.gameplayFrame = tk.Frame(self.class_window, bg=mn.COLORS[1])
         self.gameplayFrame.place(x=180, y=330)
         if user_choice == 'Rock':
@@ -99,6 +103,10 @@ class rock_paper_scissors(object):
     def Restart(self):
         self.gameplayFrame.destroy()
         self.try_again_button.destroy()
+        self.rock_button.config(state=tk.NORMAL)
+        self.paper_button.config(state=tk.NORMAL)
+        self.scissors_button.config(state=tk.NORMAL)
+        self.exit_button.config(state=tk.NORMAL)
     def on_close(self, main_window):
         if messagebox.askokcancel("Quit", "Do you want to quit?"):
             self.class_window.destroy()
