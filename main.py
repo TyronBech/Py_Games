@@ -1,7 +1,7 @@
 import tkinter as tk
-from tkinter import messagebox
 from dict_images import resized_images
 import RPS as rps
+import TTT as ttt
 
 COLORS = {
     1 : '#6F61C0',
@@ -13,9 +13,10 @@ def Game_start(type):
         window.withdraw()
         if type == 1:
             RPS_Game = rps.rock_paper_scissors(window, images)
+        elif type == 2:
+            TTT_game = ttt.tic_tac_toe(window, images)
 def on_close():
-    if messagebox.askokcancel("Quit", "Do you want to quit?"):
-        window.destroy()
+    window.destroy()
 if __name__ == '__main__':
     window = tk.Tk()
     window.title('Mini Games')
@@ -31,7 +32,7 @@ if __name__ == '__main__':
         button_frame, image=images['RPS'], bg=COLORS[1], borderwidth=0, activebackground=COLORS[1], command= lambda: Game_start(1))
     RPS_button.grid(row=0, column=0, pady=5)
     TTT_button = tk.Button(
-        button_frame, image=images['TTT'], bg=COLORS[1], borderwidth=0, activebackground=COLORS[1])
+        button_frame, image=images['TTT'], bg=COLORS[1], borderwidth=0, activebackground=COLORS[1], command= lambda: Game_start(2))
     TTT_button.grid(row=1, column=0, pady=5)
     HM_button = tk.Button(
         button_frame, image=images['HM'], bg=COLORS[1], borderwidth=0, activebackground=COLORS[1])

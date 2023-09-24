@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 import main as mn
 import random, time
 class rock_paper_scissors(object):
@@ -9,25 +8,25 @@ class rock_paper_scissors(object):
         self.class_window.config(bg=mn.COLORS[1])
         self.class_window.geometry('450x600')
         self.class_window.resizable(False, False)
-        self.class_window.protocol('WM_DELETE_WINDOW', lambda: self.on_close(main_window))
+        self.class_window.protocol('WM_DELETE_WINDOW', lambda: self._on_close(main_window))
         self.RPS_title = tk.Label(self.class_window, image=self.images['RPS_title'], bg=mn.COLORS[1])
         self.RPS_title.pack(pady=30)
         self.frame = tk.Frame(self.class_window, bg=mn.COLORS[1], width=180, height=300)
-        self.frame.pack(padx= 10, pady=10, side='left')
+        self.frame.pack(padx= 10, pady=10, side=tk.LEFT)
         self.rock_button = tk.Button(
-            self.frame, image=self.images['Rock'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self.Gameplay('Rock'))
+            self.frame, image=self.images['Rock'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self._Gameplay('Rock'))
         self.rock_button.grid(row=0, column=0, pady=5)
         self.paper_button = tk.Button(
-            self.frame, image=self.images['Paper'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self.Gameplay('Paper'))
+            self.frame, image=self.images['Paper'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self._Gameplay('Paper'))
         self.paper_button.grid(row=1, column=0, pady=5)
         self.scissors_button = tk.Button(
-            self.frame, image=self.images['Scissors'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self.Gameplay('Scissors'))
+            self.frame, image=self.images['Scissors'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command= lambda: self._Gameplay('Scissors'))
         self.scissors_button.grid(row=2, column=0, pady=5)
         self.exit_button = tk.Button(
-            self.frame, image=self.images['Exit'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=lambda: self.Exit_game(main_window))
+            self.frame, image=self.images['Exit'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=lambda: self._Exit_game(main_window))
         self.exit_button.grid(row=3, column=0, pady=5)
         self.class_window.update()
-    def Gameplay(self, user_choice):
+    def _Gameplay(self, user_choice):
         computer_choices = {
             'Rock' : 'Rock_computer',
             'Paper' : 'Paper_computer',
@@ -65,11 +64,11 @@ class rock_paper_scissors(object):
         computer_text_label.grid(row=1, column=2, pady=2)
         self.class_window.update()
         time.sleep(2)
-        self.identify_winner(user_choice, generated_key)
+        self._identify_winner(user_choice, generated_key)
         self.try_again_button = tk.Button(
-            self.gameplayFrame, image=self.images['Try_again'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=self.Restart)
+            self.gameplayFrame, image=self.images['Try_again'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=self._Restart)
         self.try_again_button.grid(row=3, column=0, columnspan=3, pady=10)
-    def identify_winner(self, user, computer):
+    def _identify_winner(self, user, computer):
         if user == 'Rock':
             if computer == 'Rock':
                 show_winner = tk.Label(self.gameplayFrame, text='It is a tie.', font=('Consolas', 14, 'bold'), fg=mn.COLORS[3], bg=mn.COLORS[1])
@@ -100,17 +99,16 @@ class rock_paper_scissors(object):
             else:
                 show_winner = tk.Label(self.gameplayFrame, text='It is a tie.', font=('Consolas', 14, 'bold'), fg=mn.COLORS[3], bg=mn.COLORS[1])
                 show_winner.grid(row=2, column=0, columnspan=3)
-    def Restart(self):
+    def _Restart(self):
         self.gameplayFrame.destroy()
         self.try_again_button.destroy()
         self.rock_button.config(state=tk.NORMAL)
         self.paper_button.config(state=tk.NORMAL)
         self.scissors_button.config(state=tk.NORMAL)
         self.exit_button.config(state=tk.NORMAL)
-    def on_close(self, main_window):
-        if messagebox.askokcancel("Quit", "Do you want to quit?"):
-            self.class_window.destroy()
-            main_window.destroy()
-    def Exit_game(self, main_window):
+    def _on_close(self, main_window):
+        self.class_window.destroy()
+        main_window.destroy()
+    def _Exit_game(self, main_window):
         self.class_window.destroy()
         main_window.deiconify()

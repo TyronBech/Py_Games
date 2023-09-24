@@ -23,6 +23,14 @@ def resized_images():
         'Rock_computer' : resize_img('Images\\Rock_computer.png', 70, 70),
         'Paper_computer' : resize_img('Images\\Paper_computer.png', 70, 70),
         'Scissors_computer' : resize_img('Images\\Scissors_computer.png', 70, 70),
-        'Try_again' : resize_img('Images\\Try_again.png', 130, 65)
+        'Try_again' : resize_img('Images\\Try_again.png', 130, 65),
+        'TTT_title' : resize_img('Images\\TTT_title.png', 330, 130),
+        'blank_b' : resize_img('Images\\blank_button.png', 130, 130),
+        'x_b' : resize_img('Images\\x_button.png', 130, 130),
+        'o_b' : resize_img('Images\\o_button.png', 130, 130),
+        'green_x_b' : resize_img('Images\\green_x_button.png', 130, 130),
+        'green_o_b' : resize_img('Images\\green_o_button.png', 130, 130),
+        'red_x_b' : resize_img('Images\\red_x_button.png', 130, 130),
+        'red_o_b' : resize_img('Images\\red_o_button.png', 130, 130),
     }
     return img_path
