@@ -3,7 +3,8 @@ import random, time
 import Game_class as gc
 class rock_paper_scissors(gc.Game_Setup):
     def __init__(self, main_window, images):
-        super().__init__(main_window, images)
+        icon = images['RPS_icon']
+        super().__init__(main_window, images, icon)
         self.RPS_title = tk.Label(self.class_window, image=self.images['RPS_title'], bg=self.CONFIGS['c1'])
         self.RPS_title.pack(pady=30)
         self.RPS_Buttons()

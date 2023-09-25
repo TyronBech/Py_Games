@@ -33,5 +33,8 @@ def resized_images():
         'red_o_b' : resize_img('Images\\red_o_button.png', 130, 130),
         'red_blank' : resize_img('Images\\red_blank_b.png', 130, 130),
         'green_blank' : resize_img('Images\\green_blank_b.png', 130, 130),
+        'RPS_icon' : resize_img('Images\\RPS_icon.png', 500, 500),
+        'TTT_icon' : resize_img('Images\\TTT_icon.png', 500, 500),
+        'mg_icon' : resize_img('Images\\mg_icon.png', 500, 500)
     }
     return img_path

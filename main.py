@@ -18,6 +18,7 @@ if __name__ == '__main__':
     window.geometry('450x600')
     window.resizable(False, False)
     images = resized_images()
+    window.iconphoto(True, images['mg_icon'])
     Title_label = tk.Label(window, image=images['Title'], bg='#6F61C0')
     Title_label.pack(pady=20)
     button_frame = tk.Frame(window, bg='#6F61C0', width=180, height=300)
