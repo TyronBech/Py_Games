@@ -34,8 +34,5 @@ if __name__ == '__main__':
     TTT_button = tk.Button(
         button_frame, image=images['TTT'], bg=COLORS[1], borderwidth=0, activebackground=COLORS[1], command= lambda: Game_start(2))
     TTT_button.grid(row=1, column=0, pady=5)
-    HM_button = tk.Button(
-        button_frame, image=images['HM'], bg=COLORS[1], borderwidth=0, activebackground=COLORS[1])
-    HM_button.grid(row=2, column=0, pady=5)
     window.protocol("WM_DELETE_WINDOW", on_close)
     window.mainloop()

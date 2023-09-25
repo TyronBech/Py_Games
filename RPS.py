@@ -3,12 +3,13 @@ import main as mn
 import random, time
 class rock_paper_scissors(object):
     def __init__(self, main_window, images):
+        self.main_window = main_window
         self.images = images
         self.class_window = tk.Toplevel()
         self.class_window.config(bg=mn.COLORS[1])
         self.class_window.geometry('450x600')
         self.class_window.resizable(False, False)
-        self.class_window.protocol('WM_DELETE_WINDOW', lambda: self._on_close(main_window))
+        self.class_window.protocol('WM_DELETE_WINDOW', self._on_close)
         self.RPS_title = tk.Label(self.class_window, image=self.images['RPS_title'], bg=mn.COLORS[1])
         self.RPS_title.pack(pady=30)
         self.frame = tk.Frame(self.class_window, bg=mn.COLORS[1], width=180, height=300)
@@ -27,11 +28,6 @@ class rock_paper_scissors(object):
         self.exit_button.grid(row=3, column=0, pady=5)
         self.class_window.update()
     def _Gameplay(self, user_choice):
-        computer_choices = {
-            'Rock' : 'Rock_computer',
-            'Paper' : 'Paper_computer',
-            'Scissors' : 'Scissors_computer'
-        }
         self.rock_button.config(state=tk.DISABLED)
         self.paper_button.config(state=tk.DISABLED)
         self.scissors_button.config(state=tk.DISABLED)
@@ -56,18 +52,19 @@ class rock_paper_scissors(object):
         vs_label = tk.Label(self.gameplayFrame, image=self.images['vs'], bg=mn.COLORS[1])
         vs_label.grid(row=0, column=1, padx=3, pady=3, rowspan=2)
         self.class_window.update()
+        self.class_window.after(2000, lambda: self.Computer(user_choice))
+    def Computer(self, user_choice):
+        computer_choices = {
+            'Rock' : 'Rock_computer',
+            'Paper' : 'Paper_computer',
+            'Scissors' : 'Scissors_computer'
+        }
         generated_key, generated_value = random.choice(list(computer_choices.items()))
-        time.sleep(2)
         computer_label = tk.Label(self.gameplayFrame, image=self.images[generated_value], bg=mn.COLORS[1])
         computer_label.grid(row=0, column=2, padx=3, pady=3)
         computer_text_label = tk.Label(self.gameplayFrame, text=generated_key, font=('Consolas', 14, 'bold'), fg=mn.COLORS[3], bg=mn.COLORS[1])
         computer_text_label.grid(row=1, column=2, pady=2)
-        self.class_window.update()
-        time.sleep(2)
-        self._identify_winner(user_choice, generated_key)
-        self.try_again_button = tk.Button(
-            self.gameplayFrame, image=self.images['Try_again'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=self._Restart)
-        self.try_again_button.grid(row=3, column=0, columnspan=3, pady=10)
+        self.class_window.after(2000, lambda x = user_choice, y = generated_key: self._identify_winner(x, y))
     def _identify_winner(self, user, computer):
         if user == 'Rock':
             if computer == 'Rock':
@@ -99,6 +96,9 @@ class rock_paper_scissors(object):
             else:
                 show_winner = tk.Label(self.gameplayFrame, text='It is a tie.', font=('Consolas', 14, 'bold'), fg=mn.COLORS[3], bg=mn.COLORS[1])
                 show_winner.grid(row=2, column=0, columnspan=3)
+        self.try_again_button = tk.Button(
+            self.gameplayFrame, image=self.images['Try_again'], borderwidth=0, bg=mn.COLORS[1], activebackground=mn.COLORS[1], command=self._Restart)
+        self.try_again_button.grid(row=3, column=0, columnspan=3, pady=10)
     def _Restart(self):
         self.gameplayFrame.destroy()
         self.try_again_button.destroy()
@@ -106,9 +106,9 @@ class rock_paper_scissors(object):
         self.paper_button.config(state=tk.NORMAL)
         self.scissors_button.config(state=tk.NORMAL)
         self.exit_button.config(state=tk.NORMAL)
-    def _on_close(self, main_window):
+    def _on_close(self):
         self.class_window.destroy()
-        main_window.destroy()
-    def _Exit_game(self, main_window):
+        self.main_window.destroy()
+    def _Exit_game(self):
         self.class_window.destroy()
-        main_window.deiconify()
+        self.main_window.deiconify()

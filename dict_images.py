@@ -10,7 +10,6 @@ def resized_images():
         'Title' : resize_img('Images\\Title.png', 330, 180),
         'RPS' : resize_img('Images\\RPS.png', 140, 75),
         'TTT' : resize_img('Images\\TTT.png', 140, 75),
-        'HM' : resize_img('Images\\HM.png', 140, 75),
         'RPS_title' : resize_img('Images\\RPS_title.png', 330, 150),
         'Rock' : resize_img('Images\\Rock.png', 130, 65),
         'Paper': resize_img("Images\\Paper.png", 130, 65),
@@ -32,5 +31,7 @@ def resized_images():
         'green_o_b' : resize_img('Images\\green_o_button.png', 130, 130),
         'red_x_b' : resize_img('Images\\red_x_button.png', 130, 130),
         'red_o_b' : resize_img('Images\\red_o_button.png', 130, 130),
+        'red_blank' : resize_img('Images\\red_blank_b.png', 130, 130),
+        'green_blank' : resize_img('Images\\green_blank_b.png', 130, 130),
     }
     return img_path
