@@ -35,7 +35,7 @@ class tic_tac_toe(gc.Game_Setup):
                 for i in range(9):
                     if self.positions[i] == -1:
                         self.buttons_list[i].config(state=tk.NORMAL)
-                self.check_winner()
+                self._identify_winner()
                 break
     def Player(self, index):
         if self.positions[index] == -1:
@@ -43,9 +43,9 @@ class tic_tac_toe(gc.Game_Setup):
             self.buttons_list[index].config(image=self.images['x_b'], state=tk.DISABLED)
             for button in self.buttons_list:
                 button.config(state=tk.DISABLED)
-            if not self.check_winner():
+            if not self._identify_winner():
                 self.class_window.after(1700, self.Computer)
-    def check_winner(self):
+    def _identify_winner(self):
         winning_combinations = [(0, 1, 2), (3, 4, 5), (6, 7, 8),
                                 (0, 3, 6), (1, 4, 7), (2, 5, 8),
                                 (0, 4, 8), (2, 4, 6)]

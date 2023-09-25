@@ -18,6 +18,9 @@ class Game_Setup(ABC):
         self.class_window.resizable(False, False)
         self.class_window.protocol('WM_DELETE_WINDOW', self._on_close)
     @abstractclassmethod
+    def _identify_winner(self):
+        pass
+    @abstractclassmethod
     def _Restart(self):
         pass
     def _on_close(self):
